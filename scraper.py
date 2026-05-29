@@ -1,3 +1,12 @@
+# БАЗОВЫЙ СКРЕПЕР, ИСПОЛЬЗУЕТ 1 ЗАПРОС
+# Пошаговый запуск
+# Шаг 1 — сохранить куки (один раз):
+# python scraper.py --save-cookies
+# Откроется браузер → логинитесь → Enter
+# Шаг 2 — запустить поиск:
+# python scraper.py
+
+
 import json
 import asyncio
 from typing import Dict, List

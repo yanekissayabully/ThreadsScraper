@@ -1,0 +1,4 @@
+playwright
+nested-lookup
+jmespath
+parsel
