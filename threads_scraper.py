@@ -33,12 +33,10 @@ from parsel import Selector
 # ─────────────────────────────────────────────
 
 KEYWORDS = [
-    "амо срм",
-    "установить амо срм",
-    "амосрм под ключ",
+    "амо срм внедрение",
 ]
 
-DAYS_BACK = 10           # максимальный возраст поста в днях (можно менять через --days)
+DAYS_BACK = 15           # максимальный возраст поста в днях (можно менять через --days)
 MAX_RESULTS = 100       # максимум постов на один запрос
 SCROLL_COUNT = 8        # сколько раз скроллить страницу вниз (больше = медленнее, но полнее)
 COOKIES_FILE = "threads_cookies.json"
@@ -302,6 +300,20 @@ async def main():
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
     print(f"💾 Сохранено в {OUTPUT_FILE}")
+
+    from ai_filter import filter_leads
+
+    leads, non_leads = await filter_leads(results, min_score=6)
+
+    # Сохраняем отдельно лиды
+    with open("leads.json", "w", encoding="utf-8") as f:
+        json.dump(leads, f, ensure_ascii=False, indent=2)
+
+    print(f"\n🎯 ЛИДЫ ({len(leads)}):")
+    for i, lead in enumerate(leads, 1):
+        print(f"[{i}] @{lead['username']} | score: {lead['ai_score']}/10 | {lead['ai_lead_type']}")
+        print(f"     {lead['ai_reason']}")
+        print(f"     🔗 {lead['url']}\n")
 
 
 if __name__ == "__main__":

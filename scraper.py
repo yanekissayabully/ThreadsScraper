@@ -154,7 +154,7 @@ async def save_cookies():
 # ─── Запуск ────────────────────────────────────────────────────
 
 async def main():
-    keyword = "амо срм"
+    keyword = "телефония срм"
     print(f"🔍 Ищем посты по запросу: '{keyword}'")
     
     posts = await search_threads(keyword, max_results=50)
