@@ -5,9 +5,20 @@ AI-фильтрация постов через OpenAI.
 
 from openai import AsyncOpenAI
 import asyncio
+import os
+from dotenv import load_dotenv
 from typing import Optional
 
-client = AsyncOpenAI(api_key="YOUR_OPENAI_API_KEY")  # или через env
+# Загружаем переменные окружения
+load_dotenv()
+
+# Берём API-ключ из .env
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+if not OPENAI_API_KEY:
+    raise ValueError("❌ OPENAI_API_KEY не найден в .env файле!")
+
+client = AsyncOpenAI(api_key=OPENAI_API_KEY)
 
 SYSTEM_PROMPT = """
 Ты — аналитик лидов для компании, которая занимается:
