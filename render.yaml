@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: threads-lead-bot
+    runtime: image
+    repo: https://github.com/YOUR_USERNAME/YOUR_REPO
+    plan: free
+    envVars:
+      - key: TELEGRAM_TOKEN
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+    dockerfilePath: ./Dockerfile
